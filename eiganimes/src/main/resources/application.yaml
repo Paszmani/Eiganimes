@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eiganimes
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eiganimes
+    username: postgres
+    password: sql1213
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  flyway:
+    enabled: true
