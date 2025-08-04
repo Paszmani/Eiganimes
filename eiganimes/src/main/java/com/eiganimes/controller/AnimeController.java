@@ -49,4 +49,11 @@ public class AnimeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<AnimeResponse>> findByCategory(@RequestParam Long category) {
+        return ResponseEntity.ok(animeService.findByCategory(category)
+                .stream()
+                .map(AnimeMapper::toAnimeResponse)
+                .toList());
+    }
 }

@@ -35,6 +35,10 @@ public class AnimeService {
         return animeRepository.findById(id);
     }
 
+    public List<Anime> findByCategory(Long categoryId) {
+        return animeRepository.findAnimeByCategories(List.of(Category.builder().id(categoryId).build()));
+    }
+
     public Optional<Anime> update(Long animeId, Anime updateAnime) {
         Optional<Anime> optionalAnime = animeRepository.findById(animeId);
         if (optionalAnime.isPresent()) {
