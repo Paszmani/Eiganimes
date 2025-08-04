@@ -1,2 +1,2 @@
-API para catalogo de streamings de Anime
-Feito utilizando SpringBoot(Java)
+# API para catalogo de streamings de Anime
+Utilizando SpringBoot(Java) ☕
