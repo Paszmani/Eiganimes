@@ -67,6 +67,10 @@ public class AnimeService {
         return Optional.empty();
     }
 
+    public void delete(Long animeId) {
+        animeRepository.deleteById(animeId);
+    }
+
     private List<Category> findCategories(List<Category> categories) {
         List<Category> categoriesFound = new ArrayList<>();
         categories.forEach(category -> categoryService.findById(category.getId()).ifPresent(categoriesFound::add));

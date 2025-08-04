@@ -7,10 +7,12 @@ import com.eiganimes.mapper.AnimeMapper;
 import com.eiganimes.service.AnimeService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController()
@@ -55,5 +57,15 @@ public class AnimeController {
                 .stream()
                 .map(AnimeMapper::toAnimeResponse)
                 .toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Optional<Anime> optionalAnime = animeService.findById(id);
+        if(optionalAnime.isPresent()) {
+            animeService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
