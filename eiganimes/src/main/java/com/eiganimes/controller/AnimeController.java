@@ -42,4 +42,11 @@ public class AnimeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AnimeResponse> update(@PathVariable Long id, @RequestBody AnimeRequest request) {
+        return animeService.update(id, AnimeMapper.toAnime(request))
+                .map(anime -> ResponseEntity.ok(AnimeMapper.toAnimeResponse(anime)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

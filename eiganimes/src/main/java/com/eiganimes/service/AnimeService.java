@@ -7,6 +7,7 @@ import com.eiganimes.repository.AnimeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,34 @@ public class AnimeService {
 
     public Optional<Anime> findById(Long id) {
         return animeRepository.findById(id);
+    }
+
+    public Optional<Anime> update(Long animeId, Anime updateAnime) {
+        Optional<Anime> optionalAnime = animeRepository.findById(animeId);
+        if (optionalAnime.isPresent()) {
+
+            List<Category> categories = this.findCategories((updateAnime.getCategories()));
+            List<Streaming> streamings = this.findStreamings(updateAnime.getStreamings());
+
+            Anime anime = optionalAnime.get();
+            anime.setTitle(updateAnime.getTitle());
+            anime.setDescription(updateAnime.getDescription());
+            anime.setReleaseDate(updateAnime.getReleaseDate());
+            anime.setRating(updateAnime.getRating());
+
+            anime.getCategories().clear();
+            anime.getCategories().addAll(categories);
+
+            anime.getStreamings().clear();
+            anime.getCategories().addAll(categories);
+
+            anime.getStreamings().clear();
+            anime.getStreamings().addAll(streamings);
+
+            animeRepository.save(anime);
+            return Optional.of(anime);
+        }
+        return Optional.empty();
     }
 
     private List<Category> findCategories(List<Category> categories) {
