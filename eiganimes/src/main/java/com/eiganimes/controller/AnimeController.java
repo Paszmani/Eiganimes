@@ -5,6 +5,7 @@ import com.eiganimes.controller.response.AnimeResponse;
 import com.eiganimes.entity.Anime;
 import com.eiganimes.mapper.AnimeMapper;
 import com.eiganimes.service.AnimeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class AnimeController {
 
 
     @PostMapping
-    public ResponseEntity<AnimeResponse> save(@RequestBody AnimeRequest request) {
+    public ResponseEntity<AnimeResponse> save(@Valid @RequestBody AnimeRequest request) {
         Anime savedAnime = animeService.save(AnimeMapper.toAnime(request));
         return ResponseEntity.ok(AnimeMapper.toAnimeResponse(savedAnime));
     }
@@ -45,7 +46,7 @@ public class AnimeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AnimeResponse> update(@PathVariable Long id, @RequestBody AnimeRequest request) {
+    public ResponseEntity<AnimeResponse> update(@Valid @PathVariable Long id, @RequestBody AnimeRequest request) {
         return animeService.update(id, AnimeMapper.toAnime(request))
                 .map(anime -> ResponseEntity.ok(AnimeMapper.toAnimeResponse(anime)))
                 .orElse(ResponseEntity.notFound().build());
