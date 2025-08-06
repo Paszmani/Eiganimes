@@ -14,3 +14,7 @@ spring:
 
   flyway:
     enabled: true
+
+eiganimes:
+  security:
+    secret: "super-secrect-word"
