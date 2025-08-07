@@ -20,6 +20,5 @@ public record AnimeRequest(@Schema(type = "string", description = "Anime name")
                            @Schema(type = "array", description = "Category codes list")
                            List<Long> categories,
                            @Schema(type = "array", description = "Streaming service codes list")
-                           List<Long> streamings
-                           ) {
+                           List<Long> streamings) {
 }
